@@ -1,3 +1,3 @@
-app.controller('AppCtrl',['$rootScope','UserModel', function($rootScope,UserModel) {
+app.controller('AppCtrl',['$rootScope', function($rootScope) {
   var self = this;
 }])

@@ -12,12 +12,30 @@
 	<script src="assets/bower_components/angular/angular.min.js"></script>
 	<script src="assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="base/app.js"></script>
+  <script src="base/filters/date.js"></script>
 	<script src="app/controller.js"></script>
+  <script src="app/header/controller.js"></script>
 	<script src="modules/user/controller.js"></script>
   <script src="modules/user/model.js"></script>
   <script src="modules/user/service.js"></script>
 </head>
 <body data-ng-controller="AppCtrl as ctrl">
+  <header data-ng-controller="HeaderCtrl as ctrl">
+    <nav>
+      <ul>
+        <li>
+          <a href="#/home">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#/user">
+            Usuários
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
   <main ui-view></main>
 </body>
 </html>
