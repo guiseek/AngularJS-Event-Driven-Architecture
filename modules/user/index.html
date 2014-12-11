@@ -1,0 +1,24 @@
+<div data-ng-controller="UserCtrl as ctrl">
+  <p data-ng-bind="ctrl.error"></p>
+	<h1>Usuário</h1>
+	<table>
+		<thead>
+      <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Usuário</th>
+        <th>Cargo</th>
+        <th>Criação</th>
+      </tr>  
+    </thead>
+    <tbody>
+      <tr data-ng-repeat="user in ctrl.users">
+        <td data-ng-bind="user.name"></td>
+        <td data-ng-bind="user.email"></td>
+        <td data-ng-bind="user.user"></td>
+        <td data-ng-bind="user.role"></td>
+        <td data-ng-bind="user.created"></td>
+      </tr>
+    </tbody>
+	</table>
+</div>
