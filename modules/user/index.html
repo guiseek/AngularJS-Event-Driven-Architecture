@@ -20,8 +20,8 @@
         <td data-ng-bind="user.role"></td>
         <td>{{ user.created | asDate | date:'dd/MM/yyyy HH:mm:ss' }}</td>
         <td>
-          <button type="button" data-ng-click="ctrl.view(user.id)">Ver</button>
-          <button type="button" data-ng-click="ctrl.edit(user.id)">Editar</button>
+          <button type="button" data-ng-click="ctrl.view(user)">Ver</button>
+          <button type="button" data-ng-click="ctrl.edit(user)">Editar</button>
           <button type="button" data-ng-click="ctrl.remove(user.id)">Remover</button>
         </td>
       </tr>

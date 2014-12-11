@@ -18,16 +18,16 @@ app.controller('UserCtrl',['$rootScope','UserModel', function($rootScope,UserMod
   $rootScope.$on('user:remove_success', function(event, data) { this._updateSuccess(data);  });
   $rootScope.$on('user:remove_error', function(event, data) { this._updateError(data); });
 
-  var find = function(id) {
+  _find = function(id) {
     return UserModel.find(id);
   }
 
   // List
-  self.view = function(id) {
-    self.user = find(id);
+  self.view = function(user) {
+    self.user = user
   }
-  self.edit = function(id) {
-    self.user = find(id);
+  self.edit = function(user) {
+    self.user = user;
   }
   self.remove = function(id) {
     UserModel.remove(id);
