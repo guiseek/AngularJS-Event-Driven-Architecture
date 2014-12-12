@@ -1,22 +1,19 @@
-app.controller('UserCtrl',['$rootScope','UserModel', function($rootScope,UserModel) {
+app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notification) {
   var self = this;
 
   UserModel.findAll();
 
-  //var userFindAllSuccess = $rootScope.$on('user:find_all_success', function(event, data) { findAllSuccess(data);  });
-  //var userFindAllError = $rootScope.$on('user:find_all_error', function(event, data) { findAllError(data); });
-
   // Event Listener
-  $rootScope.$on('user:find_all_success', function(event, data) { this._findAllSuccess(data);  });
-  $rootScope.$on('user:find_all_error', function(event, data) { this._findAllError(data); });
-  $rootScope.$on('user:find_success', function(event, data) { this._findSuccess(data);  });
-  $rootScope.$on('user:find_error', function(event, data) { this._findError(data); });
-  $rootScope.$on('user:create_success', function(event, data) { this._createSuccess(data);  });
-  $rootScope.$on('user:create_error', function(event, data) { this._createError(data); });
-  $rootScope.$on('user:update_success', function(event, data) { this._updateSuccess(data);  });
-  $rootScope.$on('user:update_error', function(event, data) { this._updateError(data); });
-  $rootScope.$on('user:remove_success', function(event, data) { this._updateSuccess(data);  });
-  $rootScope.$on('user:remove_error', function(event, data) { this._updateError(data); });
+  Notification.addEventListener('user:find_all_success', function(event, data) { _findAll.success(data);  });
+  Notification.addEventListener('user:find_all_error', function(event, data) { _findAll.error(data); });
+  Notification.addEventListener('user:find_success', function(event, data) { _find.success(data);  });
+  Notification.addEventListener('user:find_error', function(event, data) { _find.error(data); });
+  Notification.addEventListener('user:create_success', function(event, data) { _create.success(data);  });
+  Notification.addEventListener('user:create_error', function(event, data) { _create.error(data); });
+  Notification.addEventListener('user:update_success', function(event, data) { _update.success(data);  });
+  Notification.addEventListener('user:update_error', function(event, data) { _update.error(data); });
+  Notification.addEventListener('user:remove_success', function(event, data) { _remove.success(data);  });
+  Notification.addEventListener('user:remove_error', function(event, data) { _remove.error(data); });
 
   // List
   self.view = function(user) {
@@ -43,36 +40,61 @@ app.controller('UserCtrl',['$rootScope','UserModel', function($rootScope,UserMod
   }
 
   // Event Dispatcher
-  _findAllSuccess = function(data) {
-    self.users = data;
-  }
-  _findAllError = function(data) {
-    console.warn(data);
-  }
-  _findSuccess = function(data) {
-    self.user = data;
-  }
-  _findError = function(data) {
-    console.warn(data);
-  }
-  _createSuccess = function(data) {
-    self.users.push(data);
-  }
-  _createError = function(data) {
-    console.warn(data);
-  }
-  _updateSuccess = function(data) {
-    UserModel.findAll();
-  }
-  _updateError = function(data) {
-    console.warn(data);
-  }
-  _removeSuccess = function(data) {
-    UserModel.findAll();
-  }
-  _removeError = function(data) {
-    console.warn(data);
+
+  _findAll = {
+    success: function(data) {
+      self.users = data;
+    },
+    error: function(data) {
+      console.warn(data);
+    }
+  };
+
+  _find = {
+    success: function(data) {
+      self.user = data;
+    },
+    error: function(data) {
+      console.warn(data);
+    }
   }
 
-  //$rootScope.$on('$destroy', userFindAllSuccess, userFindAllError, console.log('destroy'));
+  _create = {
+    success: function(data) {
+      self.users.push(data);
+    },
+    error: function(data) {
+      console.warn(data);
+    }
+  }
+
+  _update = {
+    success: function(data) {
+      UserModel.findAll();
+    },
+    error: function(data) {
+      console.warn(data);
+    }
+  }
+
+  _remove = {
+    success: function(data) {
+      UserModel.findAll();
+    },
+    error: function(data) {
+      console.warn(data);
+    }
+  }
+
+  Notification.removeEventListener('user:find_all_success', function(event, data) { _findAll.success(data);  });
+  Notification.removeEventListener('user:find_all_error', function(event, data) { _findAll.error(data); });
+  Notification.removeEventListener('user:find_success', function(event, data) { _find.success(data);  });
+  Notification.removeEventListener('user:find_error', function(event, data) { _find.error(data); });
+  Notification.removeEventListener('user:create_success', function(event, data) { _create.success(data);  });
+  Notification.removeEventListener('user:create_error', function(event, data) { _create.error(data); });
+  Notification.removeEventListener('user:update_success', function(event, data) { _update.success(data);  });
+  Notification.removeEventListener('user:update_error', function(event, data) { _update.error(data); });
+  Notification.removeEventListener('user:remove_success', function(event, data) { _remove.success(data);  });
+  Notification.removeEventListener('user:remove_error', function(event, data) { _remove.error(data); });
+
 }])
