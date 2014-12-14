@@ -39,12 +39,12 @@
       <div>
         <label>E-mail *</label>
         <input type="email" name="email" data-ng-model="ctrl.user.email" data-user-unique="{name: 'email'}" required>
-        <span class="successMessage" data-ng-show="userForm.email.$error.unique">E-mail já existe</span>
+        <span data-ng-show="userForm.email.$error.unique">E-mail já existe</span>
       </div>
       <div>
         <label>Usuário *</label>
         <input type="text" name="user" data-ng-model="ctrl.user.user" data-user-unique="{name: 'user'}" required>
-        <span class="successMessage" data-ng-show="userForm.user.$error.unique">Usuário já existe</span>
+        <span data-ng-show="userForm.user.$error.unique">Usuário já existe</span>
       </div>
       <div>
         <label>Senha</label>
