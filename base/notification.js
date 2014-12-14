@@ -39,13 +39,12 @@ app.factory('Notification',[function() {
       var listeners;
 
       if (typeof arguments[0] !== 'string'){
-        console.warn('Notification','First params must be an event type (String)')
+        console.warn('Notification','Primeiro parâmetro deve ser um nome de evento (String)')
       } else {
         listeners = this._listeners[arguments[0]];
 
         for(var key in listeners){
           listeners[key].apply(null, arguments);
-          //listeners[key](arguments[0],arguments[1],arguments[2],arguments[3],arguments[4],arguments[5],arguments[6]);
         }
       }
     },
