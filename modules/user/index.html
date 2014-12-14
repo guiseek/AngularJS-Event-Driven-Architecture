@@ -4,6 +4,7 @@
 	<table>
 		<thead>
       <tr>
+        <th>#</th>
         <th>Nome</th>
         <th>E-mail</th>
         <th>Usuário</th>
@@ -14,20 +15,21 @@
     </thead>
     <tbody>
       <tr data-ng-repeat="user in ctrl.users">
+        <td data-ng-bind="user.id"></td>
         <td data-ng-bind="user.name"></td>
         <td data-ng-bind="user.email"></td>
         <td data-ng-bind="user.user"></td>
         <td data-ng-bind="user.role"></td>
         <td>{{ user.created | asDate | date:'dd/MM/yyyy HH:mm:ss' }}</td>
         <td>
-          <button type="button" data-ng-click="ctrl.view(user)">Ver</button>
+          <!-- <button type="button" data-ng-click="ctrl.view(user)">Ver</button> -->
           <button type="button" data-ng-click="ctrl.edit(user)">Editar</button>
-          <button type="button" data-ng-click="ctrl.remove(user.id)">Remover</button>
+          <button type="button" data-ng-click="ctrl.remove(user)">Remover</button>
         </td>
       </tr>
     </tbody>
 	</table>
-  <form data-ng-submit="ctrl.submit()">
+  <form data-ng-submit="ctrl.submit()" name="userForm">
     <fieldset>
       <legend>Usuário</legend>
       <div>
@@ -35,12 +37,14 @@
         <input type="text" data-ng-model="ctrl.user.name">
       </div>
       <div>
-        <label>E-mail</label>
-        <input type="email" data-ng-model="ctrl.user.email">
+        <label>E-mail *</label>
+        <input type="email" name="email" data-ng-model="ctrl.user.email" data-user-unique="{name: 'email'}" required>
+        <span class="successMessage" data-ng-show="userForm.email.$error.unique">E-mail já existe</span>
       </div>
       <div>
-        <label>Usuário</label>
-        <input type="text" data-ng-model="ctrl.user.user">
+        <label>Usuário *</label>
+        <input type="text" name="user" data-ng-model="ctrl.user.user" data-user-unique="{name: 'user'}" required>
+        <span class="successMessage" data-ng-show="userForm.user.$error.unique">Usuário já existe</span>
       </div>
       <div>
         <label>Senha</label>
@@ -51,16 +55,9 @@
         <select data-ng-model="ctrl.user.role" data-ng-options="role.value as role.label for role in ctrl.roles">
           <option value="">-- Escolha o cargo --</option>
         </select>
-        <!--
-        <input list="role" data-ng-model="user.role">
-        <datalist id="role">
-          <option label="Gerente" value="manager">
-          <option label="Avaliador" value="measurer">
-        </datalist>
-        -->
       </div>
       <div>
-        <button type="reset">Limpar</button>
+        <button type="reset" data-ng-click="ctrl.reset()">Limpar</button>
         <button type="submit">Salvar</button>
       </div>
     </fieldset>

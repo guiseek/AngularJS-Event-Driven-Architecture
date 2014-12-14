@@ -1,6 +1,8 @@
 app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notification) {
   var self = this;
 
+  self.master = {};
+  
   UserModel.findAll();
 
   // Event Listener
@@ -16,14 +18,18 @@ app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notifi
   Notification.addEventListener('user:remove_error', function(event, data) { _remove.error(data); });
 
   // List
+  /*
   self.view = function(user) {
     self.user = user
   }
+  */
   self.edit = function(user) {
-    self.user = user;
+    self.user = angular.copy(user);
   }
-  self.remove = function(id) {
-    UserModel.remove(id);
+  self.remove = function(user) {
+    if (confirm('Tem certeza que deseja remover o usuário '+user.name+'?')) {
+      UserModel.remove(user.id);
+    }
   }
 
   // Form
@@ -32,15 +38,19 @@ app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notifi
     {label: 'Avaliador', value: 'measurer'}
   ];
   self.submit = function() {
-    if (self.user.hasOwnProperty('id')) {
-      UserModel.update(self.user);
+    self.master = angular.copy(self.user);
+    if (self.master.hasOwnProperty('id')) {
+      UserModel.update(self.master);
     } else {
-      UserModel.create(self.user);
+      UserModel.create(self.master);
     }
   }
+  self.reset = function() {
+    self.user = angular.copy(self.master);
+  }
+  self.reset();
 
-  // Event Dispatcher
-
+  // Event listener functions
   _findAll = {
     success: function(data) {
       self.users = data;
@@ -48,7 +58,7 @@ app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notifi
     error: function(data) {
       console.warn(data);
     }
-  };
+  }
 
   _find = {
     success: function(data) {
@@ -62,6 +72,7 @@ app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notifi
   _create = {
     success: function(data) {
       self.users.push(data);
+      self.user = {};
     },
     error: function(data) {
       console.warn(data);
@@ -71,6 +82,7 @@ app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notifi
   _update = {
     success: function(data) {
       UserModel.findAll();
+      self.user = {};
     },
     error: function(data) {
       console.warn(data);
@@ -86,6 +98,7 @@ app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notifi
     }
   }
 
+  // Event destroy
   Notification.removeEventListener('user:find_all_success', function(event, data) { _findAll.success(data);  });
   Notification.removeEventListener('user:find_all_error', function(event, data) { _findAll.error(data); });
   Notification.removeEventListener('user:find_success', function(event, data) { _find.success(data);  });

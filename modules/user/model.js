@@ -1,5 +1,6 @@
 app.factory('UserModel', ['UserService','Notification', function(UserService,Notification) {
   return {
+    // Find all
     findAll:function() {
       UserService.findAll().then(this._handleFindAllSuccess.bind(this),this._handleFindAllError.bind(this));
     },
@@ -10,6 +11,8 @@ app.factory('UserModel', ['UserService','Notification', function(UserService,Not
       Notification.notify('user:find_all_error', error.data);
       console.error('UserModel : User find all error')
     },
+
+    // Find
     find:function(id) {
       UserService.find(id).then(this._handleFindSuccess.bind(this),this._handleFindError.bind(this));
     },
@@ -20,6 +23,8 @@ app.factory('UserModel', ['UserService','Notification', function(UserService,Not
       Notification.notify('user:find_error', error.data);
       console.error('UserModel : User find error')
     },
+
+    // Create
     create:function(data) {
       UserService.create(data).then(this._handleCreateSuccess.bind(this),this._handleCreateError.bind(this));
     },
@@ -30,6 +35,8 @@ app.factory('UserModel', ['UserService','Notification', function(UserService,Not
       Notification.notify('user:create_error', error.data);
       console.error('UserModel : User create error')
     },
+
+    // Update
     update:function(data) {
       UserService.update(data).then(this._handleUpdateSuccess.bind(this),this._handleUpdateError.bind(this));
     },
@@ -40,6 +47,8 @@ app.factory('UserModel', ['UserService','Notification', function(UserService,Not
       Notification.notify('user:update_error', error.data);
       console.error('UserModel : User update error')
     },
+
+    // Remove
     remove:function(id) {
       UserService.remove(id).then(this._handleRemoveSuccess.bind(this),this._handleRemoveError.bind(this));
     },
@@ -50,6 +59,18 @@ app.factory('UserModel', ['UserService','Notification', function(UserService,Not
       Notification.notify('user:remove_error', error.data);
       console.error('UserModel : User remove error')
     },
+
+    // Unique
+    unique:function(data) {
+      UserService.unique(data).then(this._handleUniqueSuccess.bind(this),this._handleUniqueError.bind(this));
+    },
+    _handleUniqueSuccess:function(result){
+      Notification.notify('user:unique_success', result.data);
+    },
+    _handleUniqueError:function(error){
+      Notification.notify('user:unique_error', error.data);
+    },
+    // Error callback
     errorCallback: function(response){
       console.error(response);
     }

@@ -6,7 +6,7 @@ app.factory('UserService', ['$http', function($http) {
         error(this.errorCallback.bind(this));
     },
     find:function(id){
-      return $http.get(API_ROUTE + '/' + id).
+      return $http.get(API_ROUTE.concat('/').concat(id)).
         error(this.errorCallback.bind(this));
     },
     create:function(data){
@@ -14,11 +14,15 @@ app.factory('UserService', ['$http', function($http) {
         error(this.errorCallback.bind(this));
     },
     update:function(data){
-      return $http.put(API_ROUTE + '/' + data.id, data).
+      return $http.put(API_ROUTE.concat('/').concat(data.id), data).
         error(this.errorCallback.bind(this));
     },
     remove:function(id){
-      return $http.delete(API_ROUTE + '/' + id).
+      return $http.delete(API_ROUTE.concat('/').concat(id)).
+        error(this.errorCallback.bind(this));
+    },
+    unique:function(data){
+      return $http.post(API_ROUTE.concat('/unique'), data).
         error(this.errorCallback.bind(this));
     },
     errorCallback: function(error){
