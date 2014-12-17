@@ -1,25 +1,22 @@
 <!doctype html>
 <html class="no-js" lang="pt-br" data-ng-app="app">
-
 <head data-template-set="html5-reset">
-
-	<meta charset="utf-8">
-	<title>Projetos</title>
-	
-	<meta name="description" content="">
+  <meta charset="utf-8">
+  <title>Projetos</title>
+  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="assets/bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="assets/bower_components/angular/angular.min.js"></script>
-	<script src="assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script src="base/app.js"></script>
+  <script src="assets/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="assets/bower_components/angular/angular.min.js"></script>
+  <script src="assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="base/app.js"></script>
   <script src="base/notification.js"></script>
   <script src="base/filters/date.js"></script>
-	<script src="app/controller.js"></script>
+  <script src="base/directives/unique.js"></script>
+  <script src="app/controller.js"></script>
   <script src="app/header/controller.js"></script>
-	<script src="modules/user/controller.js"></script>
+  <script src="modules/user/controller.js"></script>
   <script src="modules/user/model.js"></script>
   <script src="modules/user/service.js"></script>
-  <script src="modules/user/directive.js"></script>
 </head>
 <body data-ng-controller="AppCtrl as ctrl">
   <header data-ng-controller="HeaderCtrl as ctrl">

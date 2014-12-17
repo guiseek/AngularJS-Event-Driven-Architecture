@@ -34,7 +34,7 @@
       <legend>Usuário</legend>
       <div>
         <label>Nome</label>
-        <input type="text" data-ng-model="ctrl.user.name">
+        <input type="text" data-ng-model="ctrl.user.name" required>
       </div>
       <div>
         <label>E-mail</label>
@@ -48,11 +48,11 @@
       </div>
       <div>
         <label>Senha</label>
-        <input type="password" data-ng-model="ctrl.user.pass">
+        <input type="password" data-ng-model="ctrl.user.pass" required>
       </div>
       <div>
         <label>Cargo</label>
-        <select data-ng-model="ctrl.user.role" data-ng-options="role.value as role.label for role in ctrl.roles">
+        <select data-ng-model="ctrl.user.role" data-ng-options="role.value as role.label for role in ctrl.roles" required>
           <option value="">-- Escolha o cargo --</option>
         </select>
       </div>
