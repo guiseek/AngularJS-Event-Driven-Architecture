@@ -1,4 +1,4 @@
-app.factory('UserService', ['$http', function($http) {
+angular.module('app').factory('UserService', ['$http', function($http) {
   API_ROUTE = 'http://localhost:8888/api/user';
   return {
     findAll:function(){

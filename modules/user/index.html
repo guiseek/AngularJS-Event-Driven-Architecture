@@ -37,13 +37,13 @@
         <input type="text" data-ng-model="ctrl.user.name">
       </div>
       <div>
-        <label>E-mail *</label>
-        <input type="email" name="email" data-ng-model="ctrl.user.email" data-user-unique="{name: 'email'}" required>
+        <label>E-mail</label>
+        <input type="email" name="email" data-ng-model="ctrl.user.email" data-unique data-unique-service="UserService" data-unique-column="email" required>
         <span data-ng-show="userForm.email.$error.unique">E-mail já existe</span>
       </div>
       <div>
-        <label>Usuário *</label>
-        <input type="text" name="user" data-ng-model="ctrl.user.user" data-user-unique="{name: 'user'}" required>
+        <label>Usuário</label>
+        <input type="text" name="user" data-ng-model="ctrl.user.user" data-unique data-unique-service="UserService" data-unique-column="user" required>
         <span data-ng-show="userForm.user.$error.unique">Usuário já existe</span>
       </div>
       <div>
@@ -58,7 +58,7 @@
       </div>
       <div>
         <button type="reset" data-ng-click="ctrl.reset()">Limpar</button>
-        <button type="submit">Salvar</button>
+        <button type="submit" data-ng-disabled="userForm.$invalid">Salvar</button>
       </div>
     </fieldset>
   </form>

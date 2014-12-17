@@ -1,4 +1,4 @@
-app.controller('UserCtrl',['UserModel','Notification', function(UserModel,Notification) {
+angular.module('app').controller('UserCtrl',['UserModel','Notification', function(UserModel,Notification) {
   var self = this;
 
   self.master = {};

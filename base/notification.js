@@ -1,4 +1,4 @@
-app.factory('Notification',[function() {
+angular.module('app').factory('Notification',[function() {
   return {
     _listeners:{},
 

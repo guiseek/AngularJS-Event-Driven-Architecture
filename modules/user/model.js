@@ -1,4 +1,4 @@
-app.factory('UserModel', ['UserService','Notification', function(UserService,Notification) {
+angular.module('app').factory('UserModel', ['UserService','Notification', function(UserService,Notification) {
   return {
     // Find all
     findAll:function() {
@@ -59,17 +59,7 @@ app.factory('UserModel', ['UserService','Notification', function(UserService,Not
       Notification.notify('user:remove_error', error.data);
       console.error('UserModel : User remove error')
     },
-
-    // Unique
-    unique:function(data) {
-      UserService.unique(data).then(this._handleUniqueSuccess.bind(this),this._handleUniqueError.bind(this));
-    },
-    _handleUniqueSuccess:function(result){
-      Notification.notify('user:unique_success', result.data);
-    },
-    _handleUniqueError:function(error){
-      Notification.notify('user:unique_error', error.data);
-    },
+    
     // Error callback
     errorCallback: function(response){
       console.error(response);
